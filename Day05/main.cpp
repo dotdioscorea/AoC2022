@@ -31,10 +31,8 @@ int main() {
 
                 //Get each chain of number chars
                 for (int i = 0; i < line.size(); i++) {
-                    while (line[i] >= 48 && line[i] <= 57) {
-                        temp += line[i];
-                        i++;
-                    }
+                    while (line[i] >= 48 && line[i] <= 57)
+                        temp += line[i++];
 
                     //If non numbers so far, skip stoi
                     if (temp == "")
