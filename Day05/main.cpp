@@ -25,19 +25,22 @@ int main() {
 
             //Process instructions
             if (line[0] == 'm') {
-                //Get instructions
+                //Get instructions number variables
                 int num = 0, origin = 0, target = 0;
                 std::string temp = "";
 
+                //Get each chain of number chars
                 for (int i = 0; i < line.size(); i++) {
                     while (line[i] >= 48 && line[i] <= 57) {
                         temp += line[i];
                         i++;
                     }
 
+                    //If non numbers so far, skip stoi
                     if (temp == "")
                         continue;
 
+                    //Convert chain of number chars to int
                     if (num == 0)
                         num = std::stoi(temp);
                     else if (origin == 0)
@@ -45,21 +48,24 @@ int main() {
                     else
                         target = std::stoi(temp);
 
+                    //Reset
                     temp = "";
                 }
 
                 //Process instructions
                 for (int i = 0; i < num; i++) {
+                    //Process stacks for part 1
                     stacks1[target - 1].push_back(stacks1[origin - 1].back());
                     stacks1[origin - 1].pop_back();
 
+                    //Process tacks for part 2
                     stacks2[target - 1].push_back(stacks2[origin - 1][stacks2[origin - 1].size() - num + i]);
                     stacks2[origin - 1].erase(stacks2[origin - 1].end() - num + i);
                 }
             }
         }
 
-
+        //Print answers
         std::cout << "For the first crane, the top elements of each stack are ";
         for (std::vector<char> stack: stacks1)
             std::cout << stack[stack.size() - 1];
